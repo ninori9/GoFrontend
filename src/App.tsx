@@ -1,25 +1,57 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import ROUTES from './Routes';
+import LandingPage from './pages/LandingPage';
+import FAQPage from './pages/FAQPage';
+import MyGardensPage from './pages/MyGardensPage';
+import EditAccountPage from './pages/EditAccountPage';
+import CreateReportPage from './pages/CreateReportPage';
+import PageLayout from './components/layout/PageLayout';
+import ReportCreatedPage from './pages/ReportCreatedPage';
+import SignPage from './pages/SignPage';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            key={ROUTES.LANDING}
+            path={ROUTES.LANDING}
+            element={<LandingPage/>}
+          />
+          <Route
+            key={ROUTES.FAQ}
+            path={ROUTES.FAQ}
+            element={<PageLayout children={<FAQPage/>}/>}
+          />
+          <Route
+            key={ROUTES.GARDENS}
+            path={ROUTES.GARDENS}
+            element={<PageLayout children={<MyGardensPage/>}/>}
+          />
+          <Route
+            key={ROUTES.ACCOUNT}
+            path={ROUTES.ACCOUNT}
+            element={<PageLayout children={<EditAccountPage/>}/>}
+          />
+          <Route
+            key={ROUTES.GARDEN}
+            path={`${ROUTES.GARDEN}:id`}
+            element={<PageLayout children={<SignPage/>}/>}
+          />
+          <Route
+            key={ROUTES.REPORTCREATED}
+            path={ROUTES.REPORTCREATED}
+            element={<PageLayout children={<ReportCreatedPage/>}/>}
+          />
+          <Route
+            key={ROUTES.REPORT}
+            path={`${ROUTES.REPORT}:id`}
+            element={<PageLayout children={<CreateReportPage/>}/>}
+          />
+        </Routes>
+      </BrowserRouter>
   );
 }
 
